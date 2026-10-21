@@ -11,21 +11,21 @@ export default function JobDetailPage() {
   const record = useRecordApplication()
   const [asking, setAsking] = useState(false)
 
-  if (isLoading) return <p className="text-slate-600">Loading job…</p>
-  if (isError || !job) return <p className="text-red-700">Couldn’t find this job.</p>
+  if (isLoading) return <p className="text-muted">Loading job…</p>
+  if (isError || !job) return <p className="text-red-700 dark:text-red-400">Couldn’t find this job.</p>
 
   const applied = applications?.find((a) => a.job.id === job.id)
   const sameCompany = applications?.filter((a) => a.job.company === job.company).length ?? 0
 
   return (
     <article>
-      <Link to="/jobs" className="text-sm text-accent underline">
+      <Link to="/jobs" className="text-sm text-link underline">
         Back to jobs
       </Link>
       <div className="mt-3 flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">{job.title}</h1>
-          <p className="text-slate-600">
+          <p className="text-muted">
             {job.company} · {job.location} · {formatSalary(job.salaryMin, job.salaryMax)}
           </p>
         </div>
@@ -33,7 +33,7 @@ export default function JobDetailPage() {
       </div>
 
       <section className="mt-6 grid gap-4 sm:grid-cols-2">
-        <div className="rounded border border-line bg-white p-4">
+        <div className="rounded border border-line bg-surface p-4">
           <h2 className="mb-2 font-medium">Where your resume matches</h2>
           <ul className="list-disc space-y-1 pl-5 text-sm">
             {job.match.strengths.map((s) => (
@@ -41,7 +41,7 @@ export default function JobDetailPage() {
             ))}
           </ul>
         </div>
-        <div className="rounded border border-line bg-white p-4">
+        <div className="rounded border border-line bg-surface p-4">
           <h2 className="mb-2 font-medium">What the posting asks for that’s missing</h2>
           <ul className="list-disc space-y-1 pl-5 text-sm">
             {job.match.missing.map((s) => (
@@ -50,14 +50,14 @@ export default function JobDetailPage() {
           </ul>
         </div>
       </section>
-      {job.match.summary && <p className="mt-4 text-sm text-slate-700">{job.match.summary}</p>}
+      {job.match.summary && <p className="mt-4 text-sm text-muted">{job.match.summary}</p>}
 
       <section className="mt-6">
         <h2 className="mb-2 font-medium">Description</h2>
-        <p className="max-w-prose leading-relaxed text-slate-800">{job.description}</p>
+        <p className="max-w-prose leading-relaxed text-ink">{job.description}</p>
       </section>
 
-      <section className="mt-8 rounded border border-line bg-white p-4">
+      <section className="mt-8 rounded border border-line bg-surface p-4">
         {applied ? (
           <p className="text-sm">
             You applied on {applied.appliedAt}. Status: <strong>{applied.status}</strong>.
@@ -88,13 +88,13 @@ export default function JobDetailPage() {
               Open application page
             </a>
             {sameCompany > 0 && (
-              <p className="text-sm text-amber-800">
+              <p className="text-sm text-amber-800 dark:text-amber-300">
                 You’ve already applied to {sameCompany} role{sameCompany > 1 ? 's' : ''} at {job.company}.
               </p>
             )}
           </div>
         )}
-        {record.isError && <p className="mt-2 text-sm text-red-700">Couldn’t save the application. Try again.</p>}
+        {record.isError && <p className="mt-2 text-sm text-red-700 dark:text-red-400">Couldn’t save the application. Try again.</p>}
       </section>
     </article>
   )

@@ -5,11 +5,11 @@ interface Props {
   onChange: (next: JobFilters) => void
 }
 
-const field = 'rounded border border-line bg-white px-2 py-1.5 text-sm'
+const field = 'rounded border border-line bg-surface px-2 py-1.5 text-sm'
 
 export default function JobFiltersBar({ filters, onChange }: Props) {
   return (
-    <div className="mb-5 flex flex-wrap items-end gap-4 rounded border border-line bg-white p-4">
+    <div className="mb-5 flex flex-wrap items-end gap-4 rounded border border-line bg-surface p-4">
       <label className="flex flex-col gap-1 text-sm">
         Search
         <input

@@ -13,9 +13,13 @@ const delay = (ms = 250) => new Promise<void>((resolve) => setTimeout(resolve, m
 export async function listJobs(filters: JobFilters): Promise<JobWithMatch[]> {
   await delay()
   const q = filters.query.trim().toLowerCase()
+  
+  const appliedIds = new Set(applications.map((a) => a.job.id))
+  
   return jobs
     .map((job) => ({ ...job, match: matches[job.id] }))
     .filter((j) => {
+      if (appliedIds.has(j.id)) return false // applied jobs live in Applications only
       if (q && !`${j.title} ${j.company} ${j.description}`.toLowerCase().includes(q)) return false
       if (filters.remoteOnly && !j.remote) return false
       if (filters.minSalary !== null && (j.salaryMax ?? 0) < filters.minSalary) return false

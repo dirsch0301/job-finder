@@ -1,12 +1,37 @@
 @import "tailwindcss";
 
-@theme {
+/* Lets `dark:` classes follow the .dark class on <html> instead of the OS setting. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme static {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --color-ink: #1f2933;
+  --color-muted: #52606d;
   --color-paper: #f7f8f7;
+  --color-surface: #ffffff;
+  --color-subtle: #f1f4f3;
   --color-line: #dde2e0;
   --color-accent: #0f766e;
   --color-accent-strong: #115e59;
+  --color-link: #0f766e;
+}
+
+/* Dark values. Same token names, so components don't change. */
+.dark {
+  --color-ink: #e6ecea;
+  --color-muted: #a6b4b0;
+  --color-paper: #121816;
+  --color-surface: #1a2220;
+  --color-subtle: #232d2a;
+  --color-line: #2e3a37;
+  --color-link: #5eead4;
+}
+
+html {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
 }
 
 body {
@@ -14,6 +39,12 @@ body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
+}
+
+input,
+select,
+button {
+  color: inherit;
 }
 
 :focus-visible {

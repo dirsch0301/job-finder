@@ -20,10 +20,10 @@ export default function JobsPage() {
       <h1 className="mb-4 text-2xl font-semibold tracking-tight">Recommended jobs</h1>
       <JobFiltersBar filters={filters} onChange={setFilters} />
 
-      {isLoading && <p className="text-slate-600">Loading jobs…</p>}
-      {isError && <p className="text-red-700">Couldn’t load jobs. Check that the API is running and try again.</p>}
+      {isLoading && <p className="text-muted">Loading jobs…</p>}
+      {isError && <p className="text-red-700 dark:text-red-400">Couldn’t load jobs. Check that the API is running and try again.</p>}
       {data && data.length === 0 && (
-        <p className="text-slate-600">No jobs match these filters. Lower the minimum match or clear the search.</p>
+        <p className="text-muted">No jobs match these filters. Lower the minimum match or clear the search.</p>
       )}
 
       <ul className="flex flex-col gap-3">
@@ -31,15 +31,15 @@ export default function JobsPage() {
           <li key={job.id}>
             <Link
               to={`/jobs/${job.id}`}
-              className="flex items-start justify-between gap-4 rounded border border-line bg-white p-4 hover:border-accent"
+              className="flex items-start justify-between gap-4 rounded border border-line bg-surface p-4 hover:border-accent"
             >
               <div>
                 <h2 className="font-medium">{job.title}</h2>
-                <p className="text-sm text-slate-600">
+                <p className="text-sm text-muted">
                   {job.company} · {job.location}
                   {job.remote ? ' · Remote OK' : ''}
                 </p>
-                <p className="mt-1 text-sm text-slate-600">
+                <p className="mt-1 text-sm text-muted">
                   {formatSalary(job.salaryMin, job.salaryMax)} · Posted {job.postedAt}
                 </p>
               </div>

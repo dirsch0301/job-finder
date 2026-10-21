@@ -9,7 +9,7 @@ const links = [
 export default function Layout() {
   return (
     <div className="min-h-screen">
-      <header className="border-b border-line bg-white">
+      <header className="border-b border-line bg-surface">
         <div className="mx-auto flex max-w-5xl items-center gap-8 px-4 py-3">
           <span className="text-lg font-semibold tracking-tight">Job Finder</span>
           <nav className="flex gap-1" aria-label="Main">
@@ -19,7 +19,7 @@ export default function Layout() {
                 to={l.to}
                 className={({ isActive }) =>
                   `rounded px-3 py-1.5 text-sm font-medium ${
-                    isActive ? 'bg-accent text-white' : 'text-slate-600 hover:bg-slate-100'
+                    isActive ? 'bg-accent text-white' : 'text-muted hover:bg-subtle'
                   }`
                 }
               >

@@ -12,21 +12,21 @@ export default function ApplicationsPage() {
   return (
     <div>
       <h1 className="mb-4 text-2xl font-semibold tracking-tight">Applications</h1>
-      {isLoading && <p className="text-slate-600">Loading applications…</p>}
-      {isError && <p className="text-red-700">Couldn’t load applications.</p>}
+      {isLoading && <p className="text-muted">Loading applications…</p>}
+      {isError && <p className="text-red-700 dark:text-red-400">Couldn’t load applications.</p>}
       {data && data.length === 0 && (
-        <p className="text-slate-600">
+        <p className="text-muted">
           Nothing tracked yet. Apply to a job from the{' '}
-          <Link className="text-accent underline" to="/jobs">
+          <Link className="text-link underline" to="/jobs">
             jobs list
           </Link>{' '}
           and it will show up here.
         </p>
       )}
       {data && data.length > 0 && (
-        <div className="overflow-x-auto rounded border border-line bg-white">
+        <div className="overflow-x-auto rounded border border-line bg-surface">
           <table className="w-full text-left text-sm">
-            <thead className="border-b border-line bg-slate-50">
+            <thead className="border-b border-line bg-subtle">
               <tr>
                 <th className="px-3 py-2 font-medium">Company</th>
                 <th className="px-3 py-2 font-medium">Role</th>
@@ -40,7 +40,7 @@ export default function ApplicationsPage() {
                 <tr key={a.id} className="border-b border-line last:border-0">
                   <td className="px-3 py-2">{a.job.company}</td>
                   <td className="px-3 py-2">
-                    <Link className="text-accent underline" to={`/jobs/${a.job.id}`}>
+                    <Link className="text-link underline" to={`/jobs/${a.job.id}`}>
                       {a.job.title}
                     </Link>
                   </td>
@@ -49,7 +49,7 @@ export default function ApplicationsPage() {
                   <td className="px-3 py-2">
                     <select
                       aria-label={`Status for ${a.job.title}`}
-                      className="rounded border border-line bg-white px-2 py-1"
+                      className="rounded border border-line bg-surface px-2 py-1"
                       value={a.status}
                       onChange={(e) => update.mutate({ id: a.id, status: e.target.value as ApplicationStatus })}
                     >

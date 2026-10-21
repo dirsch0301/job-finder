@@ -15,7 +15,10 @@ export function useRecordApplication() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (jobId: string) => api.recordApplication(jobId),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ['applications'] }),
+        onSuccess: () => {
+          qc.invalidateQueries({ queryKey: ['applications'] })
+          qc.invalidateQueries({ queryKey: ['jobs'] })
+        },
   })
 }
 
